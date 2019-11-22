@@ -1,31 +1,26 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const app = express();
+const cors = require('cors')
 require ('dotenv/config')
+const app = express();
 
 
 // Middlewares
-// app.use('/posts', () =>{
-//     console.log('middle ware')
-// })
-app.use(express.json());
-
+app.use(cors())
+app.use(express.json())
 
 // import routes
+const authRoutes = require('./routes/auth')
 const userRoutes = require('./routes/users')
 const petRoutes = require('./routes/pets')
-app.use('/users', userRoutes)
-app.use('/pets', petRoutes)
-// app.use('/pets', petRoutes)
+app.use('/api/', authRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/pets', petRoutes)
 
-// Routes
-app.get('/', (req,res)=>{
+app.get('/api', (req,res)=>{
     res.send('We are on home')
 })
 
-app.get('/posts', (req,res) => {
-    res.send('We are on posts')
-})
 
 
 // connect to db

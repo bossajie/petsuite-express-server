@@ -5,7 +5,7 @@ const PetSchema = mongoose.Schema({
     type: String,
     breed: String,
     size : String,
-    owner : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
+    owner : { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
     created_at: {
         type: Date,
         default: Date.now()
